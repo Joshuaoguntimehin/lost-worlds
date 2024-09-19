@@ -1,0 +1,68 @@
+[gd_scene load_steps=7 format=3 uid="uid://dpbkqkykvwl1o"]
+
+[ext_resource type="PackedScene" uid="uid://biccsnnkcerfg" path="res://health_bar.tscn" id="1_s4dtg"]
+[ext_resource type="Script" path="res://gamescreen.gd" id="1_xjxg1"]
+[ext_resource type="Texture2D" uid="uid://tjco1k8mui0l" path="res://ui/tile_0044.png" id="2_dctig"]
+[ext_resource type="Texture2D" uid="uid://c60vn7slk2apo" path="res://kenney_pixel-platformer/Tiles/tile_0046.png" id="3_uhvsj"]
+[ext_resource type="Texture2D" uid="uid://c2dlyfsm7jmfx" path="res://collectables/coins-chests-etc-2-0.png" id="4_yw0bs"]
+[ext_resource type="Texture2D" uid="uid://brt37vro7j6bf" path="res://ui/icons8-pause-24.png" id="6_citbc"]
+
+[node name="gamescreen" type="CanvasLayer"]
+script = ExtResource("1_xjxg1")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+offset_left = 2.0
+offset_top = -3.0
+offset_right = 49.0
+offset_bottom = 87.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="purse_TextureButton" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(0, 66)
+offset_left = 1.0
+offset_top = 55.0
+offset_right = 53.0
+offset_bottom = 121.0
+texture_normal = ExtResource("6_citbc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 1123.0
+offset_bottom = 54.0
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(-408, 14)
+layout_mode = 2
+
+[node name="health_bar" parent="VBoxContainer/Control" instance=ExtResource("1_s4dtg")]
+position = Vector2(4, 2)
+heart1 = ExtResource("2_dctig")
+heart0 = ExtResource("3_uhvsj")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Control" type="Control" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/HBoxContainer/Control"]
+texture_filter = 1
+position = Vector2(24, 24)
+scale = Vector2(1.39554, 0.905063)
+texture = ExtResource("4_yw0bs")
+centered = false
+offset = Vector2(-11, -22)
+hframes = 11
+vframes = 8
+frame = 4
+
+[node name="collectable_Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "0"
+
+[connection signal="pressed" from="purse_TextureButton" to="." method="_on_purse_texture_button_pressed"]

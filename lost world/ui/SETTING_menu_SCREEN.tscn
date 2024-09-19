@@ -1,0 +1,85 @@
+[gd_scene load_steps=8 format=3 uid="uid://cooxoxm4lr3cx"]
+
+[ext_resource type="Script" path="res://ui/SETTING_menu_SCREEN.gd" id="1_lrs33"]
+[ext_resource type="Texture2D" uid="uid://bki2xq6c1vtnh" path="res://backgroung/warped-files/warped-files/PNG/environment/environment-preview.png" id="2_i8btf"]
+[ext_resource type="Theme" uid="uid://dg1vntjuwsbuf" path="res://ui/theme.tres" id="3_53a7s"]
+[ext_resource type="Theme" uid="uid://bgs5saqpwxq0i" path="res://ui/new_theme.tres" id="4_nhg5c"]
+[ext_resource type="Texture2D" uid="uid://c2pyrknu5nlhh" path="res://backgroung/warped-files/warped-files/PNG/spritesheets/player/player-shoot-up.png" id="5_k0adr"]
+[ext_resource type="Texture2D" uid="uid://bfu5p1q8udbi4" path="res://backgroung/warped-files/warped-files/PNG/spritesheets/enemies/jumper-jump.png" id="6_lb18m"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ashqg"]
+bg_color = Color(0.54902, 0.00392157, 0.431373, 1)
+
+[node name="SETTINGmenuscreen" type="CanvasLayer"]
+process_mode = 3
+layer = 2
+script = ExtResource("1_lrs33")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(0.286275, 0.690196, 0.607843, 1)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_i8btf")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 21.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("3_53a7s")
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_ashqg")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+theme = ExtResource("4_nhg5c")
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
+custom_minimum_size = Vector2(96, 69)
+layout_mode = 2
+
+[node name="windowOptionButton" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="resolutionOptionButton" type="OptionButton" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="main menu" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "main menu
+"
+
+[node name="Player-shoot-up" type="Sprite2D" parent="."]
+position = Vector2(387, 555)
+scale = Vector2(1.288, 1.35)
+texture = ExtResource("5_k0adr")
+
+[node name="Jumper-jump" type="Sprite2D" parent="."]
+position = Vector2(494, 467)
+texture = ExtResource("6_lb18m")
+
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/windowOptionButton" to="." method="_on_window_option_button_item_selected"]
+[connection signal="item_selected" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/resolutionOptionButton" to="." method="_on_resolution_option_button_item_selected"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/MarginContainer/VBoxContainer/main menu" to="." method="_on_main_menu_pressed"]

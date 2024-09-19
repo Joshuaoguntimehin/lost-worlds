@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://do2ax0d4a08w5"]
+
+[ext_resource type="Texture2D" uid="uid://oov1bxk7qncw" path="res://kenney_pixel-platformer/Tiles/tile_0027.png" id="1_qfawe"]
+[ext_resource type="Script" path="res://Door/keys/key.gd" id="1_wxhv4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sf6hd"]
+radius = 9.0
+
+[node name="Key" type="Node2D"]
+script = ExtResource("1_wxhv4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_qfawe")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_sf6hd")
+debug_color = Color(0.92549, 0.196078, 0.486275, 0.419608)
+
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

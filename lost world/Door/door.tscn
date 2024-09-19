@@ -1,0 +1,79 @@
+[gd_scene load_steps=8 format=3 uid="uid://csrws8ysw0lmy"]
+
+[ext_resource type="Script" path="res://Door/door_script.gd" id="1_xkh8b"]
+[ext_resource type="Texture2D" uid="uid://cn0f4gksiw3ms" path="res://Door/door-opened.png" id="2_r7kp0"]
+[ext_resource type="Texture2D" uid="uid://cjnuhc4gcmwql" path="res://Door/door.png" id="3_runqs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3rg7s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_r7kp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_runqs")
+}],
+"loop": false,
+"name": &"close door",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_runqs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_r7kp0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_runqs")
+}],
+"loop": false,
+"name": &"door open",
+"speed": 2.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cg3c5"]
+size = Vector2(22, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c6kt7"]
+size = Vector2(10, 33)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lq7yn"]
+size = Vector2(44, 33)
+
+[node name="Door" type="StaticBody2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_xkh8b")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -33)
+sprite_frames = SubResource("SpriteFrames_3rg7s")
+animation = &"close door"
+autoplay = "door open"
+frame = 1
+frame_progress = 1.0
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(11, -16.5)
+shape = SubResource("RectangleShape2D_cg3c5")
+
+[node name="EXArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EXArea2D"]
+position = Vector2(5, -16.5)
+shape = SubResource("RectangleShape2D_c6kt7")
+debug_color = Color(0.792157, 0.411765, 0.298039, 0.419608)
+
+[node name="active_Area2D2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="active_Area2D2"]
+position = Vector2(-22, -16.5)
+shape = SubResource("RectangleShape2D_lq7yn")
+
+[connection signal="body_entered" from="EXArea2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="EXArea2D" to="." method="_on_area_2d_body_exited"]
+[connection signal="body_entered" from="active_Area2D2" to="." method="_on_active_area_2d_2_body_entered"]
+[connection signal="body_exited" from="active_Area2D2" to="." method="_on_active_area_2d_2_body_exited"]

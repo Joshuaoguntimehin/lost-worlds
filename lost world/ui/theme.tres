@@ -1,0 +1,37 @@
+[gd_resource type="Theme" load_steps=8 format=3 uid="uid://dg1vntjuwsbuf"]
+
+[ext_resource type="FontFile" uid="uid://bbsusoh3nkvlc" path="res://ui/GravityRegular5.ttf" id="1_w4fl1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_snpue"]
+bg_color = Color(0.576471, 0.709804, 0.984314, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5rqdi"]
+bg_color = Color(0.278431, 0.415686, 0.921569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vn7ou"]
+bg_color = Color(0.223529, 0.34902, 0.831373, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d4gve"]
+bg_color = Color(0.0745098, 0.227451, 0.52549, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vj01"]
+bg_color = Color(0.607843, 0.435294, 0.796078, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7b5rn"]
+bg_color = Color(0.223529, 0.411765, 0.898039, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[resource]
+Button/font_sizes/font_size = 24
+Button/fonts/font = ExtResource("1_w4fl1")
+Button/styles/focus = SubResource("StyleBoxFlat_snpue")
+Button/styles/hover = SubResource("StyleBoxFlat_5rqdi")
+Button/styles/normal = SubResource("StyleBoxFlat_vn7ou")
+Button/styles/pressed = SubResource("StyleBoxFlat_d4gve")
+MarginContainer/constants/margin_left = 0
+MarginContainer/constants/margin_right = 0
+PopupMenu/styles/hover = SubResource("StyleBoxFlat_6vj01")
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_7b5rn")

@@ -1,0 +1,202 @@
+[gd_scene load_steps=22 format=3 uid="uid://be2hcxx6xfn2k"]
+
+[ext_resource type="Script" path="res://attack.gd" id="7_ww0mn"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_df6oj"]
+load_path = "res://.godot/imported/dino.png-de3515998627b41758f67abcfb7c0437.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_figkd"]
+atlas = SubResource("CompressedTexture2D_df6oj")
+region = Rect2(0, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bim4g"]
+atlas = SubResource("CompressedTexture2D_df6oj")
+region = Rect2(32, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjbtb"]
+atlas = SubResource("CompressedTexture2D_df6oj")
+region = Rect2(64, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bsa0"]
+atlas = SubResource("CompressedTexture2D_df6oj")
+region = Rect2(96, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xuckv"]
+atlas = SubResource("CompressedTexture2D_df6oj")
+region = Rect2(128, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vlla0"]
+atlas = SubResource("CompressedTexture2D_df6oj")
+region = Rect2(160, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h8oov"]
+atlas = SubResource("CompressedTexture2D_df6oj")
+region = Rect2(192, 0, 32, 26)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ktjf0"]
+load_path = "res://.godot/imported/dino-idle.png-538ca40c3e351a2b4cb7ef9527356e80.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cbct6"]
+atlas = SubResource("CompressedTexture2D_ktjf0")
+region = Rect2(0, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14u30"]
+atlas = SubResource("CompressedTexture2D_ktjf0")
+region = Rect2(32, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_napug"]
+atlas = SubResource("CompressedTexture2D_ktjf0")
+region = Rect2(64, 0, 32, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0iw0g"]
+atlas = SubResource("CompressedTexture2D_ktjf0")
+region = Rect2(96, 0, 32, 26)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k1wo3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_figkd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bim4g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kjbtb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bsa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xuckv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vlla0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h8oov")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cbct6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_14u30")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_napug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0iw0g")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vbyvh"]
+radius = 7.76209
+
+[sub_resource type="GDScript" id="GDScript_jxkwo"]
+script/source = "extends Node
+@export var character_body_2d : CharacterBody2D
+@export var animation_sprite_2d : AnimatedSprite2D
+
+const GRAVITY : int = 1000
+
+func _physics_process(delta):
+	if !character_body_2d.is_on_floor():
+		character_body_2d.velocity.y +=  GRAVITY * delta
+		
+	character_body_2d.move_and_slide()
+"
+
+[sub_resource type="GDScript" id="GDScript_luwc8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_347k1"]
+radius = 75.1033
+
+[sub_resource type="GDScript" id="GDScript_5j61t"]
+script/source = "extends NodeState
+
+func _ready():
+	pass
+	
+func _process(delta : float):
+	pass
+func _physics_process(delta : float):
+	pass
+	
+func transition_te():
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_qjja8"]
+script/source = "extends NodeState
+
+@export var character_body_2d : CharacterBody2D
+@export var animated_sprite_2d: AnimatedSprite2D
+@export var slow_down_speed: int = 50
+func  on_process(delta):
+	pass
+	
+func on_physics_process(delta):
+	character_body_2d.velocity.x = move_toward(character_body_2d.velocity.x, 0, slow_down_speed * delta)
+	animated_sprite_2d.play(\"idle\")
+	character_body_2d.move_and_slide()
+	
+func enter():
+	pass
+
+func _exit():
+	pass
+"
+
+[node name="enemycode" type="CharacterBody2D"]
+collision_layer = 4
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -26)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_k1wo3")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.224856
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -16)
+scale = Vector2(2, 2)
+shape = SubResource("CircleShape2D_vbyvh")
+
+[node name="gravity" type="Node" parent="." node_paths=PackedStringArray("character_body_2d", "animation_sprite_2d")]
+script = SubResource("GDScript_jxkwo")
+character_body_2d = NodePath("..")
+animation_sprite_2d = NodePath("../AnimatedSprite2D")
+
+[node name="statemachinecontroller" type="Node" parent="."]
+script = SubResource("GDScript_luwc8")
+
+[node name="attackArea2D" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attackArea2D"]
+position = Vector2(0.5, -14.5)
+shape = SubResource("CircleShape2D_347k1")
+debug_color = Color(0.635294, 0.52549, 0.156863, 0.419608)
+
+[node name="state_machine" type="Node" parent="."]
+script = SubResource("GDScript_5j61t")
+
+[node name="idle" type="Node" parent="state_machine"]
+script = SubResource("GDScript_qjja8")
+
+[node name="attack" type="Node" parent="state_machine"]
+script = ExtResource("7_ww0mn")
+
+[connection signal="body_entered" from="attackArea2D" to="statemachinecontroller" method="_on_attack_area_2d_body_entered"]
+[connection signal="body_exited" from="attackArea2D" to="statemachinecontroller" method="_on_attack_area_2d_body_exited"]

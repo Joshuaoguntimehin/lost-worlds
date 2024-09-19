@@ -1,0 +1,66 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfynxx7id5xny"]
+
+[ext_resource type="Texture2D" uid="uid://oeiirgf5yjte" path="res://enemy_crab/impact/enemy-death.png" id="1_gpv4k"]
+[ext_resource type="Script" path="res://enemy death effect.gd" id="2_2cuhe"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyado"]
+atlas = ExtResource("1_gpv4k")
+region = Rect2(0, 0, 67, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a3rk0"]
+atlas = ExtResource("1_gpv4k")
+region = Rect2(67, 0, 67, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_da5or"]
+atlas = ExtResource("1_gpv4k")
+region = Rect2(134, 0, 67, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyc6f"]
+atlas = ExtResource("1_gpv4k")
+region = Rect2(201, 0, 67, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mx37s"]
+atlas = ExtResource("1_gpv4k")
+region = Rect2(268, 0, 67, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m8cfr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyado")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a3rk0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_da5or")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyc6f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mx37s")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8gh5m"]
+
+[node name="enemy_death_effect" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_m8cfr")
+autoplay = "default"
+frame = 5
+frame_progress = 1.0
+script = ExtResource("2_2cuhe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8gh5m")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

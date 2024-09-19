@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://biccsnnkcerfg"]
+
+[ext_resource type="Script" path="res://pickup/health_pick_up/health_bar.gd" id="1_vtywa"]
+[ext_resource type="Texture2D" uid="uid://tjco1k8mui0l" path="res://ui/tile_0044.png" id="2_g6cld"]
+
+[node name="health_bar" type="Node2D"]
+script = ExtResource("1_vtywa")
+
+[node name="hearth_1" type="Sprite2D" parent="."]
+position = Vector2(7, 6)
+texture = ExtResource("2_g6cld")
+
+[node name="hearth_2" type="Sprite2D" parent="."]
+position = Vector2(23, 6)
+texture = ExtResource("2_g6cld")
+
+[node name="hearth_3" type="Sprite2D" parent="."]
+position = Vector2(39, 6)
+texture = ExtResource("2_g6cld")

@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://dbewd15p2poyc"]
+
+[node name="player_death_effect" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
